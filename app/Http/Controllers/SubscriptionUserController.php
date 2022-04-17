@@ -38,7 +38,7 @@ class SubscriptionUserController extends Controller
             ]);
             $response = success_response('Subscription User created successfully',$user);
         }catch (\Throwable $e){
-            $response = error_response('An error occurred',$e);
+            $response = error_response('An error occurred',$e->getMessage());
         }
         return $response;
     }
@@ -75,7 +75,7 @@ class SubscriptionUserController extends Controller
             $subscriptionUser->save();
             $response = success_response('Subscription User updated successfully',$subscriptionUser);
         }catch (\Throwable $e){
-            $response = error_response('An error occurred',$e);
+            $response = error_response('An error occurred',$e->getMessage());
         }
         return $response;
     }
@@ -89,10 +89,10 @@ class SubscriptionUserController extends Controller
     public function destroy(SubscriptionUser $subscriptionUser)
     {
         try{
-            $subscriptionUser->delete();
+            $subscriptionUser->forceDelete();
             return success_response('Subscription user deleted successfully');
         }catch (\Throwable $e){
-            return error_response('Something went wrong',$e);
+            return error_response('Something went wrong',$e->getMessage());
         }
     }
 }

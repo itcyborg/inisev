@@ -38,7 +38,7 @@ class WebsiteController extends Controller
             ]);
             $response=success_response('Website created successfully',$website);
         }catch (\Throwable $e){
-            $response=error_response('Something went wrong',$e);
+            $response=error_response('Something went wrong',$e->getMessage());
         }
         return $response;
     }
@@ -74,7 +74,7 @@ class WebsiteController extends Controller
             $website->url=$validated->url;
             $response=success_response('Website updated successfully',$website);
         }catch (\Throwable $e){
-            $response=error_response('Something went wrong',$e);
+            $response=error_response('Something went wrong',$e->getMessage());
         }
         return $response;
     }
@@ -91,7 +91,7 @@ class WebsiteController extends Controller
             $website->delete();
             $response=success_response('Website deleted successfully');
         }catch (\Throwable $e){
-            $response=error_response('Something went wrong');
+            $response=error_response('Something went wrong',$e->getMessage());
         }
         return $response;
     }

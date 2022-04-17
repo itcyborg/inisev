@@ -14,59 +14,17 @@ class SubscriptionController extends Controller
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Subscription  $subscription
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Subscription $subscription)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Subscription  $subscription
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Subscription $subscription)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Subscription  $subscription
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Subscription $subscription)
-    {
-        //
+        return success_response('All subscriptions',Subscription::all());
     }
 
     public function createSubscription(Request $request)
     {
         $validated = (object) $request->validate([
-            'subscription_user_id'=>'required',
-            'website_id'=>'required'
+            'subscription_user_id'=>'required|exists:subscription_users,id',
+            'website_id'=>'required|exists:websites,id'
+        ],[
+            'subscription_user_id.exists'=>'The user does not exist',
+            'website_id.exists'=>'The website does not exist',
         ]);
 
         try{
