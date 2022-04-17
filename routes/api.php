@@ -18,3 +18,5 @@ Route::resource('subscription-users',\App\Http\Controllers\SubscriptionUserContr
 Route::resource('post',\App\Http\Controllers\PostController::class);
 Route::resource('subscription',\App\Http\Controllers\SubscriptionController::class);
 Route::resource('website',\App\Http\Controllers\WebsiteController::class);
+Route::post('subscription/create',[\App\Http\Controllers\SubscriptionController::class,'createSubscription']);
+Route::post('subscription/remove',[\App\Http\Controllers\SubscriptionController::class,'removeSubscription']);

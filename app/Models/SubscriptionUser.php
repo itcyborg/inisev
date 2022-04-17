@@ -4,11 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Str;
 
 class SubscriptionUser extends Model
 {
-    use HasFactory;
+    use HasFactory,Notifiable;
 
     protected $fillable=[
         'name','email','active'
@@ -25,5 +26,10 @@ class SubscriptionUser extends Model
         self::creating(function($model){
             $model->uuid=Str::uuid();
         });
+    }
+
+    public function subscriptions()
+    {
+        return $this->hasMany(Subscription::class);
     }
 }
