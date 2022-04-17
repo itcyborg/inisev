@@ -47,8 +47,11 @@ class SubscriptionController extends Controller
     public function removeSubscription(Request $request)
     {
         $validated = (object) $request->validate([
-            'subscription_user_id'=>'required',
-            'website_id'=>'required'
+            'subscription_user_id'=>'required|exists:subscription_users,id',
+            'website_id'=>'required|exists:websites,id'
+        ],[
+            'subscription_user_id.exists'=>'The user does not exist',
+            'website_id.exists'=>'The website does not exist',
         ]);
 
         try{
